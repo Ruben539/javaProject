@@ -1,0 +1,18 @@
+server:
+  port: 8088
+  
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/appPagos
+    username: postgres
+    password: 1993
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    #hibernate:
+      #ddl-auto: update  # O puede ser validate, create, etc.
+    show-sql: true      # Muestra las consultas SQL en la consola
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
