@@ -1,18 +1,27 @@
 server:
   port: 8088
-  
+
 spring:
+  application:
+    name: innova_facturas_back
   datasource:
-    url: jdbc:postgresql://localhost:5432/appPagos
-    username: postgres
-    password: 1993
-    driver-class-name: org.postgresql.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password:
+    url: jdbc:mysql://localhost:3306/innovafacturas?useSSL=false
 
+    # username: elias
+    # password: Jels#1993
+    # url: jdbc:mysql://50.116.46.85/innovafacturas?allowPublicKeyRetrieval=true&useSSL=false
   jpa:
-    #hibernate:
-      #ddl-auto: update  # O puede ser validate, create, etc.
-    show-sql: true      # Muestra las consultas SQL en la consola
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+    database-platform: org.hibernate.dialect.MySQLDialect
+  liquibase:
+    change-log: classpath:liquibase/db.changelog-master.xml
+    #contexts: dev,test # Opcional: para especificar contextos de ejecución
+    #default-schema: public # Opcional: especificar el esquema por defecto
+    drop-first: false # Opcional: para eliminar y recrear la base de datos al inicio
+    enabled: false # Habilitar Liquibase (esto es el valor por defecto)
 
+springdoc:
+  swagger-ui:
+    path: /swagger-ui-custom.html

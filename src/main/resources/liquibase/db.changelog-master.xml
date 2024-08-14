@@ -1,0 +1,1863 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+<!-- Creacion de la base de datos... -->
+    <changeSet id="202407221640" author="jels1991">
+
+        <createTable tableName="ajuste">
+            <column name="id_ajuste" type="INT UNSIGNED" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="id_empresa" type="INT UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nombre_ajuste" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="acronimo" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="descripcion" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="INT UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="INT UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="auditoria">
+            <column name="id_auditoria" type="INT UNSIGNED" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="tabla_afectada" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fecha_creacion" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="creado_por" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="accion" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="accion_detalle" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="detalle" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="cliente">
+            <column name="id_cliente" type="INT UNSIGNED" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="id_empresa" type="INT UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nombre_cliente" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ruc_cliente" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="dv_ruc_cliente" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ruc" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="direccion_cliente" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fecha_cierre_cliente" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status_cliente" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="telefono_cliente" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="email_cliente" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="cotizacion">
+            <column name="id_cotizacion" type="INT UNSIGNED" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="id_ajuste" type="INT UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="compra" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="venta" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="empresa">
+            <column name="id_empresa" type="INT UNSIGNED" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="nombre_empresa" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ruc_empresa" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="direccion_empresa" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="telefono_empresa" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="correo_empresa" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status_empresa" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="factura">
+            <column name="id_factura" type="INT UNSIGNED" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="id_empresa" type="INT UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="tipo_factura" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="timbrado_factura" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fecha_inicio_vigencia_factura" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fecha_fin_vigencia_factura" type="DATE"/>
+            <column name="cdc_factura" type="VARCHAR(255)"/>
+            <column name="codigo_control_factura" type="VARCHAR(255)"/>
+            <column name="numero_factura" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ruc_emisor_factura" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="razon_social_emisor_factura" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ruc_receptor_factura" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="razon_social_receptor_factura" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fecha_emision_factura" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="condicion_venta_factura" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="gravada_5" type="DOUBLE"/>
+            <column name="gravada_10" type="DOUBLE"/>
+            <column name="gravada_exenta" type="DOUBLE"/>
+            <column name="monto_total_factura" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="monto_total_iva_factura" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="monto_5_factura" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="monto_10_factura" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="exenta_factura" type="DOUBLE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status_factura" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="INT UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="INT UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="historialinformes">
+            <column name="id_historial" type="INT UNSIGNED" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="id_user" type="INT UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="cliente" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mes" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="anho" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="datos" type="TEXT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status_historial" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="persona">
+            <column name="id_persona" type="INT UNSIGNED" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="nombre_persona" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="apellido_persona" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="telefono_persona" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ci_persona" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status_persona" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="rgfactura">
+            <column name="id_rgfactura" type="INT UNSIGNED">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="id_empresa" type="INT UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ruc_receptor" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="razon_social_receptor" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="mes_periodo" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="anho_periodo" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="codigo_tipo_registro" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="codigo_tipo_comprador" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nro_identificador_comprador" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nombre_comprador" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="codigo_tipo_comprobante" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="fecha_emision" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nro_timbrado" type="VARCHAR(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="nro_comprobante" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="monto_iva_10" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="monto_iva_5" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="monto_exenta" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="monto_total_comprobante" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="condicion_venta" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="moneda_extranjera" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="imputa_iva" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="imputa_ire" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="imputa_irp_rsp" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="comprobante_asociado" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="timbrado_comprobante_asociado" type="VARCHAR(100)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="created_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="rol">
+            <column name="id_rol" type="INT UNSIGNED" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="nombre_rol" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status_rol" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="INT UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="INT UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="user">
+            <column name="id_user" type="INT UNSIGNED" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="id_empresa" type="INT UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id_persona" type="INT UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="id_rol" type="INT UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_login" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="DATETIME">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="INT UNSIGNED">
+                <constraints nullable="false"/>
+            </column>
+            <column name="status_user" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="ajuste"
+                                 baseColumnNames="id_empresa"
+                                 constraintName="fk_ajuste_empresa"
+                                 referencedTableName="empresa"
+                                 referencedColumnNames="id_empresa"/>
+
+        <addForeignKeyConstraint baseTableName="cliente"
+                                 baseColumnNames="id_empresa"
+                                 constraintName="fk_cliente_empresa"
+                                 referencedTableName="empresa"
+                                 referencedColumnNames="id_empresa"/>
+
+        <addForeignKeyConstraint baseTableName="cotizacion"
+                                 baseColumnNames="id_ajuste"
+                                 constraintName="fk_cotizacion_ajuste"
+                                 referencedTableName="ajuste"
+                                 referencedColumnNames="id_ajuste"/>
+
+        <addForeignKeyConstraint baseTableName="factura"
+                                 baseColumnNames="id_empresa"
+                                 constraintName="fk_factura_empresa"
+                                 referencedTableName="empresa"
+                                 referencedColumnNames="id_empresa"/>
+
+        <addForeignKeyConstraint baseTableName="factura"
+                                 baseColumnNames="created_by"
+                                 constraintName="fk_factura_user_created"
+                                 referencedTableName="user"
+                                 referencedColumnNames="id_user"/>
+
+        <addForeignKeyConstraint baseTableName="factura"
+                                 baseColumnNames="updated_by"
+                                 constraintName="fk_factura_empresa_updated"
+                                 referencedTableName="user"
+                                 referencedColumnNames="id_user"/>
+
+        <addForeignKeyConstraint baseTableName="historialinformes"
+                                 baseColumnNames="id_user"
+                                 constraintName="fk_historialinformes_user"
+                                 referencedTableName="user"
+                                 referencedColumnNames="id_user"/>
+                                 
+        <addForeignKeyConstraint baseTableName="rgfactura"
+                                 baseColumnNames="id_empresa"
+                                 constraintName="fk_rgfactura_empresa"
+                                 referencedTableName="empresa"
+                                 referencedColumnNames="id_empresa"/>
+
+        <addForeignKeyConstraint baseTableName="user"
+                                 baseColumnNames="id_rol"
+                                 constraintName="fk_user_rol"
+                                 referencedTableName="rol"
+                                 referencedColumnNames="id_rol"/>
+        
+        <addForeignKeyConstraint baseTableName="user"
+                                 baseColumnNames="id_persona"
+                                 constraintName="fk_user_persona"
+                                 referencedTableName="persona"
+                                 referencedColumnNames="id_persona"/>
+
+    </changeSet> 
+
+<!-- Carga de datos demostracion de la base de datos... -->
+    <changeSet id="202407221641" author="jels1991">
+        <insert tableName="empresa">
+            <column name="id_empresa" value="1"/>
+            <column name="nombre_empresa" value="Empresa DemoSRL"/>
+            <column name="ruc_empresa" value="80001111-2"/>
+            <column name="direccion_empresa" value="Asuncion"/>
+            <column name="telefono_empresa" value="0991000001"/>
+            <column name="correo_empresa" value="demo@demo.com"/>
+            <column name="status_empresa" value="ACTIVO"/>
+            <column name="created_at" value="2024-07-08"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_at" value="2024-07-09 14:57:10"/>
+            <column name="updated_by" value="1"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="202407221642" author="jels1991">
+        <insert tableName="ajuste">
+            <column name="id_ajuste" value="1"/>
+            <column name="id_empresa" value="1"/>
+            <column name="nombre_ajuste" value="CAMBIOS"/>
+            <column name="acronimo" value="$"/>
+            <column name="descripcion" value="Dolar"/>
+            <column name="status" value="Status"/>
+            <column name="created_at" value="2024-07-15"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_at" value="2024-07-15"/>
+            <column name="updated_by" value="1"/>
+        </insert>
+
+        <insert tableName="ajuste">
+            <column name="id_ajuste" value="2"/>
+            <column name="id_empresa" value="1"/>
+            <column name="nombre_ajuste" value="CAMBIOS"/>
+            <column name="acronimo" value="€"/>
+            <column name="descripcion" value="Euro"/>
+            <column name="status" value="Status"/>
+            <column name="created_at" value="2024-07-15"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_at" value="2024-07-15"/>
+            <column name="updated_by" value="1"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="202407221643" author="jels1991">
+        <insert tableName="persona">
+            <column name="id_persona" value="1"/>
+            <column name="nombre_persona" value="Root"/>
+            <column name="apellido_persona" value="Root"/>
+            <column name="telefono_persona" value="0972123456"/>
+            <column name="ci_persona" value="1234567"/>
+            <column name="status_persona" value="ACTIVO"/>
+            <column name="created_at" value="2024-07-02 10:04:59"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_at" value="2024-07-02 14:04:59"/>
+            <column name="updated_by" value="1"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="202407221644" author="jels1991">
+        <insert tableName="rol">
+            <column name="id_rol" value="1"/>
+            <column name="nombre_rol" value="ROOT"/>
+            <column name="status_rol" value="ACTIVO"/>
+            <column name="created_at" value="2024-06-28 17:30:30"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_at" value="2024-06-28 21:30:30"/>
+            <column name="updated_by" value="1"/>
+        </insert>
+
+        <insert tableName="rol">
+            <column name="id_rol" value="2"/>
+            <column name="nombre_rol" value="CONTADOR"/>
+            <column name="status_rol" value="ACTIVO"/>
+            <column name="created_at" value="2024-07-01 17:08:52"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_at" value="2024-07-01 21:08:52"/>
+            <column name="updated_by" value="1"/>
+        </insert>
+
+        <insert tableName="rol">
+            <column name="id_rol" value="3"/>
+            <column name="nombre_rol" value="CARGADOR"/>
+            <column name="status_rol" value="ACTIVO"/>
+            <column name="created_at" value="2024-07-01 17:08:52"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_at" value="2024-07-01 21:08:52"/>
+            <column name="updated_by" value="1"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="202407221645" author="jels1991">
+        <insert tableName="user">
+            <column name="id_user" value="1"/>
+            <column name="id_empresa" value="1"/>
+            <column name="username" value="elias"/>
+            <column name="password" value="123456"/>
+            <column name="id_rol" value="1"/>
+            <column name="last_login" value="2024-06-28 12:01:00"/>
+            <column name="created_at" value="2024-06-28 12:01:00"/>
+            <column name="created_by" value="1"/>
+            <column name="id_persona" value="1"/>
+            <column name="status_user" value="ACTIVO"/>
+            <column name="updated_at" value="2024-07-08 21:51:16"/>
+        </insert>
+
+        <insert tableName="user">
+            <column name="id_user" value="5"/>
+            <column name="id_empresa" value="1"/>
+            <column name="username" value="jels"/>
+            <column name="password" value="123789"/>
+            <column name="id_rol" value="2"/>
+            <column name="last_login" value="2024-07-01 17:10:34"/>
+            <column name="created_at" value="2024-07-01 17:10:34"/>
+            <column name="created_by" value="1"/>
+            <column name="id_persona" value="1"/>
+            <column name="status_user" value="ACTIVO"/>
+            <column name="updated_at" value="2024-07-08 21:51:18"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="202407221646" author="jels1991">
+        <insert tableName="cliente">
+            <column name="id_cliente" value="1"/>
+            <column name="id_empresa" value="1"/>
+            <column name="nombre_cliente" value="DEMO SRL"/>
+            <column name="ruc_cliente" value="80001111"/>
+            <column name="dv_ruc_cliente" value="2"/>
+            <column name="ruc" value="80001111-2"/>
+            <column name="direccion_cliente" value="CALLE DEMO SRL"/>
+            <column name="fecha_cierre_cliente" value="10"/>
+            <column name="status_cliente" value="ACTIVO"/>
+            <column name="created_by" value="1"/>
+            <column name="telefono_cliente" value="0972482200"/>
+            <column name="email_cliente" value="demo@demo.com"/>
+            <column name="updated_by" value="1"/>
+            <column name="created_at" value="2024-07-19"/>
+            <column name="updated_at" value="2024-07-19 17:46:12"/>
+        </insert>
+
+        <insert tableName="cliente">
+            <column name="id_cliente" value="2"/>
+            <column name="id_empresa" value="1"/>
+            <column name="nombre_cliente" value="DASDASDASD"/>
+            <column name="ruc_cliente" value="89321514"/>
+            <column name="dv_ruc_cliente" value="1"/>
+            <column name="ruc" value="89321514-1"/>
+            <column name="direccion_cliente" value="ADSASDASD"/>
+            <column name="fecha_cierre_cliente" value="10"/>
+            <column name="status_cliente" value="ACTIVO"/>
+            <column name="created_by" value="1"/>
+            <column name="telefono_cliente" value="215475845"/>
+            <column name="email_cliente" value="demo@demo.com"/>
+            <column name="updated_by" value="1"/>
+            <column name="created_at" value="2024-07-12"/>
+            <column name="updated_at" value="2024-07-12 20:45:17"/>
+        </insert>
+
+        <insert tableName="cliente">
+            <column name="id_cliente" value="3"/>
+            <column name="id_empresa" value="1"/>
+            <column name="nombre_cliente" value="ADASDASDASD"/>
+            <column name="ruc_cliente" value="687986798"/>
+            <column name="dv_ruc_cliente" value="1"/>
+            <column name="ruc" value="687986798-1"/>
+            <column name="direccion_cliente" value="DASADASDAS"/>
+            <column name="fecha_cierre_cliente" value="3"/>
+            <column name="status_cliente" value="ACTIVO"/>
+            <column name="created_by" value="1"/>
+            <column name="telefono_cliente" value="dasdasdasd"/>
+            <column name="email_cliente" value="dads@dasd.com"/>
+            <column name="updated_by" value="1"/>
+            <column name="created_at" value="2024-07-12"/>
+            <column name="updated_at" value="2024-07-12 20:45:17"/>
+        </insert>
+
+        <insert tableName="cliente">
+            <column name="id_cliente" value="4"/>
+            <column name="id_empresa" value="1"/>
+            <column name="nombre_cliente" value="DEMO SRL"/>
+            <column name="ruc_cliente" value="80001111"/>
+            <column name="dv_ruc_cliente" value="2"/>
+            <column name="ruc" value="80001111-2"/>
+            <column name="direccion_cliente" value="CALLE DEMO SRL"/>
+            <column name="fecha_cierre_cliente" value="10"/>
+            <column name="status_cliente" value="ACTIVO"/>
+            <column name="created_by" value="1"/>
+            <column name="telefono_cliente" value="0972482200"/>
+            <column name="email_cliente" value="demo@demo.com"/>
+            <column name="updated_by" value="1"/>
+            <column name="created_at" value="2024-07-12"/>
+            <column name="updated_at" value="2024-07-12 20:45:16"/>
+        </insert>
+
+        <insert tableName="cliente">
+            <column name="id_cliente" value="5"/>
+            <column name="id_empresa" value="1"/>
+            <column name="nombre_cliente" value="SDADASD"/>
+            <column name="ruc_cliente" value="478778"/>
+            <column name="dv_ruc_cliente" value="1"/>
+            <column name="ruc" value="478778-1"/>
+            <column name="direccion_cliente" value="ADADAD"/>
+            <column name="fecha_cierre_cliente" value="10"/>
+            <column name="status_cliente" value="ACTIVO"/>
+            <column name="created_by" value="1"/>
+            <column name="telefono_cliente" value="54654897"/>
+            <column name="email_cliente" value="demo@demo.com"/>
+            <column name="updated_by" value="1"/>
+            <column name="created_at" value="2024-07-12"/>
+            <column name="updated_at" value="2024-07-12 19:20:40"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="202407221647" author="jels1991">
+        <insert tableName="cotizacion">
+            <column name="id_cotizacion" value="1"/>
+            <column name="id_ajuste" value="1"/>
+            <column name="compra" value="7440"/>
+            <column name="venta" value="7500"/>
+            <column name="status" value="ACTIVO"/>
+            <column name="created_at" value="2024-07-15"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_at" value="2024-07-15"/>
+            <column name="updated_by" value="1"/>
+        </insert>
+
+        <insert tableName="cotizacion">
+            <column name="id_cotizacion" value="2"/>
+            <column name="id_ajuste" value="2"/>
+            <column name="compra" value="8400"/>
+            <column name="venta" value="8750"/>
+            <column name="status" value="ACTIVO"/>
+            <column name="created_at" value="2024-07-15"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_at" value="2024-07-15"/>
+            <column name="updated_by" value="1"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="202407221648" author="jels1991">
+        <insert tableName="historialinformes">
+            <column name="id_historial" value="1"/>
+            <column name="id_user" value="1"/>
+            <column name="cliente" value="12345678"/>
+            <column name="mes" value="06"/>
+            <column name="anho" value="2024"/>
+            <column name="datos" value="demo"/>
+            <column name="status_historial" value="PROCESADO"/>
+            <column name="updated_at" value="2024-07-19 14:38:47"/>
+            <column name="created_at" value="2024-07-19 10:37:06"/>
+        </insert>
+
+        <insert tableName="historialinformes">
+            <column name="id_historial" value="2"/>
+            <column name="id_user" value="1"/>
+            <column name="cliente" value="754"/>
+            <column name="mes" value="06"/>
+            <column name="anho" value="2024"/>
+            <column name="datos" value="demo"/>
+            <column name="status_historial" value="PROCESADO"/>
+            <column name="updated_at" value="2024-07-19 14:38:50"/>
+            <column name="created_at" value="2024-07-19 10:38:02"/>
+        </insert>
+
+        <insert tableName="historialinformes">
+            <column name="id_historial" value="3"/>
+            <column name="id_user" value="1"/>
+            <column name="cliente" value="754"/>
+            <column name="mes" value="06"/>
+            <column name="anho" value="2024"/>
+            <column name="datos" value="demo"/>
+            <column name="status_historial" value="RE-PROCESADO"/>
+            <column name="updated_at" value="2024-07-19 14:38:52"/>
+            <column name="created_at" value="2024-07-19 10:38:02"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="202407221649" author="jels1991">
+        <insert tableName="factura">
+            <column name="id_factura" value="1"/>
+            <column name="id_empresa" value="1"/>
+            <column name="tipo_factura" value="FACTURA ELECTRONICA"/>
+            <column name="timbrado_factura" value="16764380"/>
+            <column name="fecha_inicio_vigencia_factura" value="2023-10-26"/>
+            <column name="fecha_fin_vigencia_factura" value="NULL"/>
+            <column name="cdc_factura" value="01800608380001002000503222024053018419265337"/>
+            <column name="codigo_control_factura" value="NULL"/>
+            <column name="numero_factura" value="001-002-0005032"/>
+            <column name="ruc_emisor_factura" value="80060838-0"/>
+            <column name="razon_social_emisor_factura" value="TAKA II COLOR S.A."/>
+            <column name="ruc_receptor_factura" value="80001111-2"/>
+            <column name="razon_social_receptor_factura" value="MORADO SOCIEDAD ANONIMA"/>
+            <column name="fecha_emision_factura" value="2024-05-30"/>
+            <column name="condicion_venta_factura" value="CONTADO"/>
+            <column name="gravada_5" value="NULL"/>
+            <column name="gravada_10" value="NULL"/>
+            <column name="gravada_exenta" value="NULL"/>
+            <column name="monto_total_factura" value="643370"/>
+            <column name="monto_total_iva_factura" value="58488"/>
+            <column name="monto_5_factura" value="0"/>
+            <column name="monto_10_factura" value="58488"/>
+            <column name="exenta_factura" value="0"/>
+            <column name="created_at" value="2024-06-28"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_by" value="1"/>
+            <column name="updated_at" value="2024-07-09"/>
+            <column name="status_factura" value="ACTIVO"/>
+        </insert>
+
+        <insert tableName="factura">
+            <column name="id_factura" value="2"/>
+            <column name="id_empresa" value="1"/>
+            <column name="tipo_factura" value="FACTURA VIRTUAL"/>
+            <column name="timbrado_factura" value="17177937"/>
+            <column name="fecha_inicio_vigencia_factura" value="2024-04-17"/>
+            <column name="fecha_fin_vigencia_factura" value="NULL"/>
+            <column name="cdc_factura" value="930508EE"/>
+            <column name="codigo_control_factura" value="001-001-0000001"/>
+            <column name="numero_factura" value="3968935-2"/>
+            <column name="ruc_emisor_factura" value="DADSASD"/>
+            <column name="razon_social_emisor_factura" value="GLOBAL,INFOCONTABLE"/>
+            <column name="ruc_receptor_factura" value="80001111-2"/>
+            <column name="razon_social_receptor_factura" value="GLOBAL,INFOCONTABLE"/>
+            <column name="fecha_emision_factura" value="2024-12-27"/>
+            <column name="condicion_venta_factura" value="ASDAAA"/>
+            <column name="gravada_5" value="NULL"/>
+            <column name="gravada_10" value="NULL"/>
+            <column name="gravada_exenta" value="NULL"/>
+            <column name="monto_total_factura" value="1500000"/>
+            <column name="monto_total_iva_factura" value="0"/>
+            <column name="monto_5_factura" value="0"/>
+            <column name="monto_10_factura" value="0"/>
+            <column name="exenta_factura" value="0"/>
+            <column name="created_at" value="2024-07-10"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_by" value="1"/>
+            <column name="updated_at" value="2024-07-10"/>
+            <column name="status_factura" value="ACTIVO"/>
+        </insert>
+
+        <insert tableName="factura">
+            <column name="id_factura" value="3"/>
+            <column name="id_empresa" value="1"/>
+            <column name="tipo_factura" value="FACTURA VIRTUAL"/>
+            <column name="timbrado_factura" value="17177937"/>
+            <column name="fecha_inicio_vigencia_factura" value="2024-04-20"/>
+            <column name="fecha_fin_vigencia_factura" value="NULL"/>
+            <column name="cdc_factura" value="930508EE"/>
+            <column name="codigo_control_factura" value="001-001-0000001"/>
+            <column name="numero_factura" value="3968935-2"/>
+            <column name="ruc_emisor_factura" value="EJEMPLO DEMOSRL"/>
+            <column name="razon_social_emisor_factura" value="GLOBAL,INFOCONTABLE"/>
+            <column name="ruc_receptor_factura" value="80001111-2"/>
+            <column name="razon_social_receptor_factura" value="GLOBAL,INFOCONTABLE"/>
+            <column name="fecha_emision_factura" value="2023-12-29"/>
+            <column name="condicion_venta_factura" value="CONTADO"/>
+            <column name="gravada_5" value="NULL"/>
+            <column name="gravada_10" value="NULL"/>
+            <column name="gravada_exenta" value="NULL"/>
+            <column name="monto_total_factura" value="555555"/>
+            <column name="monto_total_iva_factura" value="0"/>
+            <column name="monto_5_factura" value="0"/>
+            <column name="monto_10_factura" value="0"/>
+            <column name="exenta_factura" value="0"/>
+            <column name="created_at" value="2024-07-10"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_by" value="1"/>
+            <column name="updated_at" value="2024-07-10"/>
+            <column name="status_factura" value="ACTIVO"/>
+        </insert>
+
+        <insert tableName="factura">
+            <column name="id_factura" value="4"/>
+            <column name="id_empresa" value="1"/>
+            <column name="tipo_factura" value="FACTURA VIRTUAL"/>
+            <column name="timbrado_factura" value="17177937"/>
+            <column name="fecha_inicio_vigencia_factura" value="2024-04-21"/>
+            <column name="fecha_fin_vigencia_factura" value="NULL"/>
+            <column name="cdc_factura" value="NULL"/>
+            <column name="codigo_control_factura" value="930508EE"/>
+            <column name="numero_factura" value="001-001-0000001"/>
+            <column name="ruc_emisor_factura" value="3968935-2"/>
+            <column name="razon_social_emisor_factura" value="dasdasdasd"/>
+            <column name="ruc_receptor_factura" value="80001111-2"/>
+            <column name="razon_social_receptor_factura" value="GLOBAL,INFOCONTABLE"/>
+            <column name="fecha_emision_factura" value="2023-12-30"/>
+            <column name="condicion_venta_factura" value="CONTADO"/>
+            <column name="gravada_5" value="NULL"/>
+            <column name="gravada_10" value="NULL"/>
+            <column name="gravada_exenta" value="NULL"/>
+            <column name="monto_total_factura" value="1500000"/>
+            <column name="monto_total_iva_factura" value="1"/>
+            <column name="monto_5_factura" value="1"/>
+            <column name="monto_10_factura" value="1"/>
+            <column name="exenta_factura" value="1"/>
+            <column name="created_at" value="2024-07-08"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_by" value="1"/>
+            <column name="updated_at" value="2024-07-08"/>
+            <column name="status_factura" value="ACTIVO"/>
+        </insert>
+
+        <insert tableName="factura">
+            <column name="id_factura" value="5"/>
+            <column name="id_empresa" value="1"/>
+            <column name="tipo_factura" value="FACTURA VIRTUAL"/>
+            <column name="timbrado_factura" value="17177937"/>
+            <column name="fecha_inicio_vigencia_factura" value="2024-04-20"/>
+            <column name="fecha_fin_vigencia_factura" value="NULL"/>
+            <column name="cdc_factura" value="NULL"/>
+            <column name="codigo_control_factura" value="930508EE"/>
+            <column name="numero_factura" value="001-001-0000001"/>
+            <column name="ruc_emisor_factura" value="3968935-2"/>
+            <column name="razon_social_emisor_factura" value="DEMOSRL"/>
+            <column name="ruc_receptor_factura" value="80001111-2"/>
+            <column name="razon_social_receptor_factura" value="DEMO SRL"/>
+            <column name="fecha_emision_factura" value="2023-12-29"/>
+            <column name="condicion_venta_factura" value="CREDITO"/>
+            <column name="gravada_5" value="NULL"/>
+            <column name="gravada_10" value="NULL"/>
+            <column name="gravada_exenta" value="NULL"/>
+            <column name="monto_total_factura" value="1500000"/>
+            <column name="monto_total_iva_factura" value="3"/>
+            <column name="monto_5_factura" value="3"/>
+            <column name="monto_10_factura" value="3"/>
+            <column name="exenta_factura" value="3"/>
+            <column name="created_at" value="2024-07-10"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_by" value="1"/>
+            <column name="updated_at" value="2024-07-10"/>
+            <column name="status_factura" value="ACTIVO"/>
+        </insert>
+
+        <insert tableName="factura">
+            <column name="id_factura" value="6"/>
+            <column name="id_empresa" value="1"/>
+            <column name="tipo_factura" value="FACTURA VIRTUAL"/>
+            <column name="timbrado_factura" value="12345678"/>
+            <column name="fecha_inicio_vigencia_factura" value="2022-09-07"/>
+            <column name="fecha_fin_vigencia_factura" value="NULL"/>
+            <column name="cdc_factura" value="9320EEE8"/>
+            <column name="codigo_control_factura" value="001-001-0000245"/>
+            <column name="numero_factura" value="3385512-9"/>
+            <column name="ruc_emisor_factura" value="DEMO SRL"/>
+            <column name="razon_social_emisor_factura" value="MORADO,SOCIEDAD,ANONIMA"/>
+            <column name="ruc_receptor_factura" value="80077042-0"/>
+            <column name="razon_social_receptor_factura" value="DEMO SRL"/>
+            <column name="fecha_emision_factura" value="2023-12-30"/>
+            <column name="condicion_venta_factura" value="CONTADO"/>
+            <column name="gravada_5" value="NULL"/>
+            <column name="gravada_10" value="NULL"/>
+            <column name="gravada_exenta" value="NULL"/>
+            <column name="monto_total_factura" value="4"/>
+            <column name="monto_total_iva_factura" value="4"/>
+            <column name="monto_5_factura" value="4"/>
+            <column name="monto_10_factura" value="4"/>
+            <column name="exenta_factura" value="4"/>
+            <column name="created_at" value="2024-07-08"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_by" value="1"/>
+            <column name="updated_at" value="2024-07-08"/>
+            <column name="status_factura" value="ACTIVO"/>
+        </insert>
+
+        <insert tableName="factura">
+            <column name="id_factura" value="7"/>
+            <column name="id_empresa" value="1"/>
+            <column name="tipo_factura" value="FACTURA VIRTUAL"/>
+            <column name="timbrado_factura" value="17177937"/>
+            <column name="fecha_inicio_vigencia_factura" value="2024-04-21"/>
+            <column name="fecha_fin_vigencia_factura" value="NULL"/>
+            <column name="cdc_factura" value="NULL"/>
+            <column name="codigo_control_factura" value="930508EE"/>
+            <column name="numero_factura" value="001-001-0000001"/>
+            <column name="ruc_emisor_factura" value="3968935-2"/>
+            <column name="razon_social_emisor_factura" value="ASDASDAS"/>
+            <column name="ruc_receptor_factura" value="80113289-4"/>
+            <column name="razon_social_receptor_factura" value="GLOBAL,INFOCONTABLE"/>
+            <column name="fecha_emision_factura" value="2023-12-30"/>
+            <column name="condicion_venta_factura" value="CREDITO"/>
+            <column name="gravada_5" value="NULL"/>
+            <column name="gravada_10" value="NULL"/>
+            <column name="gravada_exenta" value="NULL"/>
+            <column name="monto_total_factura" value="1500000"/>
+            <column name="monto_total_iva_factura" value="5"/>
+            <column name="monto_5_factura" value="5"/>
+            <column name="monto_10_factura" value="5"/>
+            <column name="exenta_factura" value="5"/>
+            <column name="created_at" value="2024-07-08"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_by" value="1"/>
+            <column name="updated_at" value="2024-07-08"/>
+            <column name="status_factura" value="ACTIVO"/>
+        </insert>
+
+        <insert tableName="factura">
+            <column name="id_factura" value="8"/>
+            <column name="id_empresa" value="1"/>
+            <column name="tipo_factura" value="FACTURA VIRTUAL"/>
+            <column name="timbrado_factura" value="17177937"/>
+            <column name="fecha_inicio_vigencia_factura" value="2024-04-19"/>
+            <column name="fecha_fin_vigencia_factura" value="NULL"/>
+            <column name="cdc_factura" value="NULL"/>
+            <column name="codigo_control_factura" value="930508EE"/>
+            <column name="numero_factura" value="001-001-0000001"/>
+            <column name="ruc_emisor_factura" value="3968935-2"/>
+            <column name="razon_social_emisor_factura" value="Mi nueva factura ingresada"/>
+            <column name="ruc_receptor_factura" value="80113289-4"/>
+            <column name="razon_social_receptor_factura" value="GLOBAL,INFOCONTABLE"/>
+            <column name="fecha_emision_factura" value="2024-01-20"/>
+            <column name="condicion_venta_factura" value="CREDITO"/>
+            <column name="gravada_5" value="NULL"/>
+            <column name="gravada_10" value="NULL"/>
+            <column name="gravada_exenta" value="NULL"/>
+            <column name="monto_total_factura" value="1500000"/>
+            <column name="monto_total_iva_factura" value="10"/>
+            <column name="monto_5_factura" value="0"/>
+            <column name="monto_10_factura" value="10"/>
+            <column name="exenta_factura" value="0"/>
+            <column name="created_at" value="2024-07-09"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_by" value="1"/>
+            <column name="updated_at" value="2024-07-09"/>
+            <column name="status_factura" value="ACTIVO"/>
+        </insert>
+
+        <insert tableName="factura">
+            <column name="id_factura" value="9"/>
+            <column name="id_empresa" value="1"/>
+            <column name="tipo_factura" value="FACTURA VIRTUAL"/>
+            <column name="timbrado_factura" value="17177937"/>
+            <column name="fecha_inicio_vigencia_factura" value="2024-04-21"/>
+            <column name="fecha_fin_vigencia_factura" value="NULL"/>
+            <column name="cdc_factura" value="NULL"/>
+            <column name="codigo_control_factura" value="930508EE"/>
+            <column name="numero_factura" value="001-001-0000001"/>
+            <column name="ruc_emisor_factura" value="3968935-2"/>
+            <column name="razon_social_emisor_factura" value="asasddas"/>
+            <column name="ruc_receptor_factura" value="80113289-4"/>
+            <column name="razon_social_receptor_factura" value="GLOBAL,INFOCONTABLE"/>
+            <column name="fecha_emision_factura" value="2023-12-30"/>
+            <column name="condicion_venta_factura" value="CONTADO"/>
+            <column name="gravada_5" value="NULL"/>
+            <column name="gravada_10" value="NULL"/>
+            <column name="gravada_exenta" value="NULL"/>
+            <column name="monto_total_factura" value="1500000"/>
+            <column name="monto_total_iva_factura" value="1"/>
+            <column name="monto_5_factura" value="1"/>
+            <column name="monto_10_factura" value="1"/>
+            <column name="exenta_factura" value="1"/>
+            <column name="created_at" value="2024-07-09"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_by" value="1"/>
+            <column name="updated_at" value="2024-07-09"/>
+            <column name="status_factura" value="ACTIVO"/>
+        </insert>
+
+        <insert tableName="factura">
+            <column name="id_factura" value="10"/>
+            <column name="id_empresa" value="1"/>
+            <column name="tipo_factura" value="FACTURA VIRTUAL"/>
+            <column name="timbrado_factura" value="17177937"/>
+            <column name="fecha_inicio_vigencia_factura" value="2024-04-21"/>
+            <column name="fecha_fin_vigencia_factura" value="NULL"/>
+            <column name="cdc_factura" value="NULL"/>
+            <column name="codigo_control_factura" value="930508EE"/>
+            <column name="numero_factura" value="001-001-0000001"/>
+            <column name="ruc_emisor_factura" value="3968935-2"/>
+            <column name="razon_social_emisor_factura" value="DADASDASD"/>
+            <column name="ruc_receptor_factura" value="80001111-2"/>
+            <column name="razon_social_receptor_factura" value="DEMO SRL"/>
+            <column name="fecha_emision_factura" value="2024-11-30"/>
+            <column name="condicion_venta_factura" value="DASDASD"/>
+            <column name="gravada_5" value="NULL"/>
+            <column name="gravada_10" value="NULL"/>
+            <column name="gravada_exenta" value="NULL"/>
+            <column name="monto_total_factura" value="1500000"/>
+            <column name="monto_total_iva_factura" value="1"/>
+            <column name="monto_5_factura" value="1"/>
+            <column name="monto_10_factura" value="1"/>
+            <column name="exenta_factura" value="1"/>
+            <column name="created_at" value="2024-07-10"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_by" value="1"/>
+            <column name="updated_at" value="2024-07-10"/>
+            <column name="status_factura" value="ACTIVO"/>
+        </insert>
+
+        <insert tableName="factura">
+            <column name="id_factura" value="11"/>
+            <column name="id_empresa" value="1"/>
+            <column name="tipo_factura" value="FACTURA VIRTUAL"/>
+            <column name="timbrado_factura" value="17177937"/>
+            <column name="fecha_inicio_vigencia_factura" value="2024-04-21"/>
+            <column name="fecha_fin_vigencia_factura" value="NULL"/>
+            <column name="cdc_factura" value="NULL"/>
+            <column name="codigo_control_factura" value="930508EE"/>
+            <column name="numero_factura" value="001-001-0000001"/>
+            <column name="ruc_emisor_factura" value="3968935-2"/>
+            <column name="razon_social_emisor_factura" value="DASDAS"/>
+            <column name="ruc_receptor_factura" value="80001111-2"/>
+            <column name="razon_social_receptor_factura" value="DEMO SRL"/>
+            <column name="fecha_emision_factura" value="2024-11-29"/>
+            <column name="condicion_venta_factura" value="ADSADSAS"/>
+            <column name="gravada_5" value="NULL"/>
+            <column name="gravada_10" value="NULL"/>
+            <column name="gravada_exenta" value="NULL"/>
+            <column name="monto_total_factura" value="1500000"/>
+            <column name="monto_total_iva_factura" value="1"/>
+            <column name="monto_5_factura" value="1"/>
+            <column name="monto_10_factura" value="1"/>
+            <column name="exenta_factura" value="1"/>
+            <column name="created_at" value="2024-07-10"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_by" value="1"/>
+            <column name="updated_at" value="2024-07-10"/>
+            <column name="status_factura" value="ACTIVO"/>
+        </insert>
+
+        <insert tableName="factura">
+            <column name="id_factura" value="12"/>
+            <column name="id_empresa" value="1"/>
+            <column name="tipo_factura" value="FACTURA VIRTUAL"/>
+            <column name="timbrado_factura" value="17177937"/>
+            <column name="fecha_inicio_vigencia_factura" value="2024-07-09"/>
+            <column name="fecha_fin_vigencia_factura" value="NULL"/>
+            <column name="cdc_factura" value="NULL"/>
+            <column name="codigo_control_factura" value="930508EE"/>
+            <column name="numero_factura" value="001-001-0000001"/>
+            <column name="ruc_emisor_factura" value="3968935-2"/>
+            <column name="razon_social_emisor_factura" value="ADASD"/>
+            <column name="ruc_receptor_factura" value="80001111-2"/>
+            <column name="razon_social_receptor_factura" value="DEMO SRL"/>
+            <column name="fecha_emision_factura" value="2024-08-18"/>
+            <column name="condicion_venta_factura" value="ADDA"/>
+            <column name="gravada_5" value="NULL"/>
+            <column name="gravada_10" value="NULL"/>
+            <column name="gravada_exenta" value="NULL"/>
+            <column name="monto_total_factura" value="1500000"/>
+            <column name="monto_total_iva_factura" value="1"/>
+            <column name="monto_5_factura" value="1"/>
+            <column name="monto_10_factura" value="1"/>
+            <column name="exenta_factura" value="1"/>
+            <column name="created_at" value="2024-07-12"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_by" value="1"/>
+            <column name="updated_at" value="2024-07-12"/>
+            <column name="status_factura" value="ACTIVO"/>
+        </insert>
+
+        <insert tableName="factura">
+            <column name="id_factura" value="13"/>
+            <column name="id_empresa" value="1"/>
+            <column name="tipo_factura" value="FACTURA VIRTUAL"/>
+            <column name="timbrado_factura" value="798789797"/>
+            <column name="fecha_inicio_vigencia_factura" value="2024-04-22"/>
+            <column name="fecha_fin_vigencia_factura" value="NULL"/>
+            <column name="cdc_factura" value="NULL"/>
+            <column name="codigo_control_factura" value="930508EE"/>
+            <column name="numero_factura" value="001-001-0000001"/>
+            <column name="ruc_emisor_factura" value="3968935-2"/>
+            <column name="razon_social_emisor_factura" value="DASDASDA"/>
+            <column name="ruc_receptor_factura" value="80001111-2"/>
+            <column name="razon_social_receptor_factura" value="DEMO SRL"/>
+            <column name="fecha_emision_factura" value="2024-07-09"/>
+            <column name="condicion_venta_factura" value="CONTADO"/>
+            <column name="gravada_5" value="NULL"/>
+            <column name="gravada_10" value="NULL"/>
+            <column name="gravada_exenta" value="NULL"/>
+            <column name="monto_total_factura" value="0"/>
+            <column name="monto_total_iva_factura" value="0"/>
+            <column name="monto_5_factura" value="0"/>
+            <column name="monto_10_factura" value="0"/>
+            <column name="exenta_factura" value="0"/>
+            <column name="created_at" value="2024-07-17"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_by" value="1"/>
+            <column name="updated_at" value="2024-07-17"/>
+            <column name="status_factura" value="ACTIVO"/>
+        </insert>
+
+        <insert tableName="factura">
+            <column name="id_factura" value="14"/>
+            <column name="id_empresa" value="1"/>
+            <column name="tipo_factura" value="FACTURA VIRTUAL"/>
+            <column name="timbrado_factura" value="17177937"/>
+            <column name="fecha_inicio_vigencia_factura" value="2024-04-22"/>
+            <column name="fecha_fin_vigencia_factura" value="NULL"/>
+            <column name="cdc_factura" value="NULL"/>
+            <column name="codigo_control_factura" value="930508EE"/>
+            <column name="numero_factura" value="001-001-0000001"/>
+            <column name="ruc_emisor_factura" value="3968935-2"/>
+            <column name="razon_social_emisor_factura" value="FASFSADFSDA"/>
+            <column name="ruc_receptor_factura" value="80001111-2"/>
+            <column name="razon_social_receptor_factura" value="DEMO SRL"/>
+            <column name="fecha_emision_factura" value="2024-07-10"/>
+            <column name="condicion_venta_factura" value="FASFSDFSD"/>
+            <column name="gravada_5" value="NULL"/>
+            <column name="gravada_10" value="NULL"/>
+            <column name="gravada_exenta" value="NULL"/>
+            <column name="monto_total_factura" value="1500000"/>
+            <column name="monto_total_iva_factura" value="4"/>
+            <column name="monto_5_factura" value="2"/>
+            <column name="monto_10_factura" value="3"/>
+            <column name="exenta_factura" value="1"/>
+            <column name="created_at" value="2024-07-11"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_by" value="1"/>
+            <column name="updated_at" value="2024-07-11"/>
+            <column name="status_factura" value="ACTIVO"/>
+        </insert>
+
+        <insert tableName="factura">
+            <column name="id_factura" value="15"/>
+            <column name="id_empresa" value="1"/>
+            <column name="tipo_factura" value="FACTURA VIRTUAL"/>
+            <column name="timbrado_factura" value="17177937"/>
+            <column name="fecha_inicio_vigencia_factura" value="2024-04-22"/>
+            <column name="fecha_fin_vigencia_factura" value="NULL"/>
+            <column name="cdc_factura" value="NULL"/>
+            <column name="codigo_control_factura" value="930508EE"/>
+            <column name="numero_factura" value="001-001-0000001"/>
+            <column name="ruc_emisor_factura" value="3968935-2"/>
+            <column name="razon_social_emisor_factura" value="DADASD"/>
+            <column name="ruc_receptor_factura" value="80001111-2"/>
+            <column name="razon_social_receptor_factura" value="DEMO SRL"/>
+            <column name="fecha_emision_factura" value="2024-07-10"/>
+            <column name="condicion_venta_factura" value="DAS"/>
+            <column name="gravada_5" value="NULL"/>
+            <column name="gravada_10" value="NULL"/>
+            <column name="gravada_exenta" value="NULL"/>
+            <column name="monto_total_factura" value="1500000"/>
+            <column name="monto_total_iva_factura" value="1"/>
+            <column name="monto_5_factura" value="1"/>
+            <column name="monto_10_factura" value="1"/>
+            <column name="exenta_factura" value="0"/>
+            <column name="created_at" value="2024-07-11"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_by" value="1"/>
+            <column name="updated_at" value="2024-07-11"/>
+            <column name="status_factura" value="ACTIVO"/>
+        </insert>
+
+        <insert tableName="factura">
+            <column name="id_factura" value="16"/>
+            <column name="id_empresa" value="1"/>
+            <column name="tipo_factura" value="FACTURA VIRTUAL"/>
+            <column name="timbrado_factura" value="17177937"/>
+            <column name="fecha_inicio_vigencia_factura" value="2024-04-21"/>
+            <column name="fecha_fin_vigencia_factura" value="NULL"/>
+            <column name="cdc_factura" value="NULL"/>
+            <column name="codigo_control_factura" value="930508EE"/>
+            <column name="numero_factura" value="001-001-0000001"/>
+            <column name="ruc_emisor_factura" value="3968935-2"/>
+            <column name="razon_social_emisor_factura" value="DASKDAS"/>
+            <column name="ruc_receptor_factura" value="80001111-2"/>
+            <column name="razon_social_receptor_factura" value="DEMO SRL"/>
+            <column name="fecha_emision_factura" value="2024-07-09"/>
+            <column name="condicion_venta_factura" value="JHGFDJHGF"/>
+            <column name="gravada_5" value="NULL"/>
+            <column name="gravada_10" value="NULL"/>
+            <column name="gravada_exenta" value="NULL"/>
+            <column name="monto_total_factura" value="1500000"/>
+            <column name="monto_total_iva_factura" value="1"/>
+            <column name="monto_5_factura" value="1"/>
+            <column name="monto_10_factura" value="1"/>
+            <column name="exenta_factura" value="1"/>
+            <column name="created_at" value="2024-07-11"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_by" value="1"/>
+            <column name="updated_at" value="2024-07-11"/>
+            <column name="status_factura" value="ACTIVO"/>
+        </insert>
+
+        <insert tableName="factura">
+            <column name="id_factura" value="17"/>
+            <column name="id_empresa" value="1"/>
+            <column name="tipo_factura" value="FACTURA VIRTUAL"/>
+            <column name="timbrado_factura" value="17177937"/>
+            <column name="fecha_inicio_vigencia_factura" value="2024-04-20"/>
+            <column name="fecha_fin_vigencia_factura" value="NULL"/>
+            <column name="cdc_factura" value="NULL"/>
+            <column name="codigo_control_factura" value="930508EE"/>
+            <column name="numero_factura" value="001-001-0000001"/>
+            <column name="ruc_emisor_factura" value="3968935-2"/>
+            <column name="razon_social_emisor_factura" value="ASDASD"/>
+            <column name="ruc_receptor_factura" value="80001111-2"/>
+            <column name="razon_social_receptor_factura" value="GLOBAL,INFOCONTABLE"/>
+            <column name="fecha_emision_factura" value="2024-07-08"/>
+            <column name="condicion_venta_factura" value="CONTADO"/>
+            <column name="gravada_5" value="NULL"/>
+            <column name="gravada_10" value="NULL"/>
+            <column name="gravada_exenta" value="NULL"/>
+            <column name="monto_total_factura" value="1500000"/>
+            <column name="monto_total_iva_factura" value="12"/>
+            <column name="monto_5_factura" value="2"/>
+            <column name="monto_10_factura" value="2"/>
+            <column name="exenta_factura" value="2"/>
+            <column name="created_at" value="2024-07-12"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_by" value="1"/>
+            <column name="updated_at" value="2024-07-12"/>
+            <column name="status_factura" value="ACTIVO"/>
+        </insert>
+
+        <insert tableName="factura">
+            <column name="id_factura" value="18"/>
+            <column name="id_empresa" value="1"/>
+            <column name="tipo_factura" value="FACTURA VIRTUAL"/>
+            <column name="timbrado_factura" value="17177937"/>
+            <column name="fecha_inicio_vigencia_factura" value="2024-04-23"/>
+            <column name="fecha_fin_vigencia_factura" value="NULL"/>
+            <column name="cdc_factura" value="NULL"/>
+            <column name="codigo_control_factura" value="930508EE"/>
+            <column name="numero_factura" value="001-001-0000001"/>
+            <column name="ruc_emisor_factura" value="3968935-2"/>
+            <column name="razon_social_emisor_factura" value="ASDASDASD"/>
+            <column name="ruc_receptor_factura" value="80113289-4"/>
+            <column name="razon_social_receptor_factura" value="GLOBAL,INFOCONTABLE"/>
+            <column name="fecha_emision_factura" value="2024-07-10"/>
+            <column name="condicion_venta_factura" value="DASDASD"/>
+            <column name="gravada_5" value="NULL"/>
+            <column name="gravada_10" value="NULL"/>
+            <column name="gravada_exenta" value="NULL"/>
+            <column name="monto_total_factura" value="1500000"/>
+            <column name="monto_total_iva_factura" value="12"/>
+            <column name="monto_5_factura" value="12"/>
+            <column name="monto_10_factura" value="12"/>
+            <column name="exenta_factura" value="12"/>
+            <column name="created_at" value="2024-07-11"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_by" value="1"/>
+            <column name="updated_at" value="2024-07-11"/>
+            <column name="status_factura" value="ACTIVO"/>
+        </insert>
+
+        <insert tableName="factura">
+            <column name="id_factura" value="19"/>
+            <column name="id_empresa" value="1"/>
+            <column name="tipo_factura" value="FACTURA VIRTUAL"/>
+            <column name="timbrado_factura" value="17177937"/>
+            <column name="fecha_inicio_vigencia_factura" value="2024-04-22"/>
+            <column name="fecha_fin_vigencia_factura" value="NULL"/>
+            <column name="cdc_factura" value="NULL"/>
+            <column name="codigo_control_factura" value="930508EE"/>
+            <column name="numero_factura" value="001-001-0000001"/>
+            <column name="ruc_emisor_factura" value="3968935-2"/>
+            <column name="razon_social_emisor_factura" value="DASDADASD"/>
+            <column name="ruc_receptor_factura" value="80001111-2"/>
+            <column name="razon_social_receptor_factura" value="GLOBAL,INFOCONTABLE"/>
+            <column name="fecha_emision_factura" value="2024-07-10"/>
+            <column name="condicion_venta_factura" value="DDDDDD"/>
+            <column name="gravada_5" value="NULL"/>
+            <column name="gravada_10" value="NULL"/>
+            <column name="gravada_exenta" value="NULL"/>
+            <column name="monto_total_factura" value="1500000"/>
+            <column name="monto_total_iva_factura" value="12"/>
+            <column name="monto_5_factura" value="12"/>
+            <column name="monto_10_factura" value="12"/>
+            <column name="exenta_factura" value="12"/>
+            <column name="created_at" value="2024-07-12"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_by" value="1"/>
+            <column name="updated_at" value="2024-07-12"/>
+            <column name="status_factura" value="ACTIVO"/>
+        </insert>
+
+        <insert tableName="factura">
+            <column name="id_factura" value="20"/>
+            <column name="id_empresa" value="1"/>
+            <column name="tipo_factura" value="FACTURA VIRTUAL"/>
+            <column name="timbrado_factura" value="17177937"/>
+            <column name="fecha_inicio_vigencia_factura" value="2024-04-23"/>
+            <column name="fecha_fin_vigencia_factura" value="NULL"/>
+            <column name="cdc_factura" value="NULL"/>
+            <column name="codigo_control_factura" value="930508EE"/>
+            <column name="numero_factura" value="001-001-0000001"/>
+            <column name="ruc_emisor_factura" value="3968935-2"/>
+            <column name="razon_social_emisor_factura" value="ASDASDASD"/>
+            <column name="ruc_receptor_factura" value="80113289-4"/>
+            <column name="razon_social_receptor_factura" value="GLOBAL,INFOCONTABLE"/>
+            <column name="fecha_emision_factura" value="2024-07-11"/>
+            <column name="condicion_venta_factura" value="ASDADA"/>
+            <column name="gravada_5" value="NULL"/>
+            <column name="gravada_10" value="NULL"/>
+            <column name="gravada_exenta" value="NULL"/>
+            <column name="monto_total_factura" value="1500000"/>
+            <column name="monto_total_iva_factura" value="12"/>
+            <column name="monto_5_factura" value="12"/>
+            <column name="monto_10_factura" value="12"/>
+            <column name="exenta_factura" value="12"/>
+            <column name="created_at" value="2024-07-11"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_by" value="1"/>
+            <column name="updated_at" value="2024-07-11"/>
+            <column name="status_factura" value="ACTIVO"/>
+        </insert>
+
+        <insert tableName="factura">
+            <column name="id_factura" value="21"/>
+            <column name="id_empresa" value="1"/>
+            <column name="tipo_factura" value="FACTURA VIRTUAL"/>
+            <column name="timbrado_factura" value="17177937"/>
+            <column name="fecha_inicio_vigencia_factura" value="2024-04-23"/>
+            <column name="fecha_fin_vigencia_factura" value="NULL"/>
+            <column name="cdc_factura" value="NULL"/>
+            <column name="codigo_control_factura" value="930508EE"/>
+            <column name="numero_factura" value="001-001-0000001"/>
+            <column name="ruc_emisor_factura" value="3968935-2"/>
+            <column name="razon_social_emisor_factura" value="ASDASDASD"/>
+            <column name="ruc_receptor_factura" value="80113289-4"/>
+            <column name="razon_social_receptor_factura" value="GLOBAL,INFOCONTABLE"/>
+            <column name="fecha_emision_factura" value="2024-07-11"/>
+            <column name="condicion_venta_factura" value="ASDASDSAD"/>
+            <column name="gravada_5" value="NULL"/>
+            <column name="gravada_10" value="NULL"/>
+            <column name="gravada_exenta" value="NULL"/>
+            <column name="monto_total_factura" value="1500000"/>
+            <column name="monto_total_iva_factura" value="12"/>
+            <column name="monto_5_factura" value="12"/>
+            <column name="monto_10_factura" value="12"/>
+            <column name="exenta_factura" value="12"/>
+            <column name="created_at" value="2024-07-11"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_by" value="1"/>
+            <column name="updated_at" value="2024-07-11"/>
+            <column name="status_factura" value="ACTIVO"/>
+        </insert>
+
+        <insert tableName="factura">
+            <column name="id_factura" value="22"/>
+            <column name="id_empresa" value="1"/>
+            <column name="tipo_factura" value="FACTURA VIRTUAL"/>
+            <column name="timbrado_factura" value="17177937"/>
+            <column name="fecha_inicio_vigencia_factura" value="2024-04-23"/>
+            <column name="fecha_fin_vigencia_factura" value="NULL"/>
+            <column name="cdc_factura" value="NULL"/>
+            <column name="codigo_control_factura" value="930508EE"/>
+            <column name="numero_factura" value="001-001-0000001"/>
+            <column name="ruc_emisor_factura" value="3968935-2"/>
+            <column name="razon_social_emisor_factura" value="ASDADASD"/>
+            <column name="ruc_receptor_factura" value="80113289-4"/>
+            <column name="razon_social_receptor_factura" value="GLOBAL,INFOCONTABLE"/>
+            <column name="fecha_emision_factura" value="2024-07-11"/>
+            <column name="condicion_venta_factura" value="ADASD"/>
+            <column name="gravada_5" value="NULL"/>
+            <column name="gravada_10" value="NULL"/>
+            <column name="gravada_exenta" value="NULL"/>
+            <column name="monto_total_factura" value="1500000"/>
+            <column name="monto_total_iva_factura" value="12"/>
+            <column name="monto_5_factura" value="12"/>
+            <column name="monto_10_factura" value="12"/>
+            <column name="exenta_factura" value="12"/>
+            <column name="created_at" value="2024-07-11"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_by" value="1"/>
+            <column name="updated_at" value="2024-07-11"/>
+            <column name="status_factura" value="ACTIVO"/>
+        </insert>
+
+        <insert tableName="factura">
+            <column name="id_factura" value="23"/>
+            <column name="id_empresa" value="1"/>
+            <column name="tipo_factura" value="FACTURA VIRTUAL"/>
+            <column name="timbrado_factura" value="17177937"/>
+            <column name="fecha_inicio_vigencia_factura" value="2024-04-23"/>
+            <column name="fecha_fin_vigencia_factura" value="NULL"/>
+            <column name="cdc_factura" value="NULL"/>
+            <column name="codigo_control_factura" value="930508EE"/>
+            <column name="numero_factura" value="001-001-0000001"/>
+            <column name="ruc_emisor_factura" value="3968935-2"/>
+            <column name="razon_social_emisor_factura" value="ASDASDASD"/>
+            <column name="ruc_receptor_factura" value="80113289-4"/>
+            <column name="razon_social_receptor_factura" value="GLOBAL,INFOCONTABLE"/>
+            <column name="fecha_emision_factura" value="2024-07-17"/>
+            <column name="condicion_venta_factura" value="SDASDASDAD"/>
+            <column name="gravada_5" value="NULL"/>
+            <column name="gravada_10" value="NULL"/>
+            <column name="gravada_exenta" value="NULL"/>
+            <column name="monto_total_factura" value="1500000"/>
+            <column name="monto_total_iva_factura" value="12"/>
+            <column name="monto_5_factura" value="12"/>
+            <column name="monto_10_factura" value="12"/>
+            <column name="exenta_factura" value="12"/>
+            <column name="created_at" value="2024-07-12"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_by" value="1"/>
+            <column name="updated_at" value="2024-07-12"/>
+            <column name="status_factura" value="ACTIVO"/>
+        </insert>
+
+        <insert tableName="factura">
+            <column name="id_factura" value="24"/>
+            <column name="id_empresa" value="1"/>
+            <column name="tipo_factura" value="FACTURA VIRTUAL"/>
+            <column name="timbrado_factura" value="17177937"/>
+            <column name="fecha_inicio_vigencia_factura" value="2024-04-22"/>
+            <column name="fecha_fin_vigencia_factura" value="NULL"/>
+            <column name="cdc_factura" value="NULL"/>
+            <column name="codigo_control_factura" value="930508EE"/>
+            <column name="numero_factura" value="001-001-0000001"/>
+            <column name="ruc_emisor_factura" value="3968935-2"/>
+            <column name="razon_social_emisor_factura" value="NBMNBMBMN"/>
+            <column name="ruc_receptor_factura" value="80001111-2"/>
+            <column name="razon_social_receptor_factura" value="GLOBAL,INFOCONTABLE"/>
+            <column name="fecha_emision_factura" value="2024-06-10"/>
+            <column name="condicion_venta_factura" value="CONTADO"/>
+            <column name="gravada_5" value="NULL"/>
+            <column name="gravada_10" value="NULL"/>
+            <column name="gravada_exenta" value="NULL"/>
+            <column name="monto_total_factura" value="1500000"/>
+            <column name="monto_total_iva_factura" value="12211212"/>
+            <column name="monto_5_factura" value="0"/>
+            <column name="monto_10_factura" value="12211212"/>
+            <column name="exenta_factura" value="0"/>
+            <column name="created_at" value="2024-07-12"/>
+            <column name="created_by" value="1"/>
+            <column name="updated_by" value="1"/>
+            <column name="updated_at" value="2024-07-12"/>
+            <column name="status_factura" value="ACTIVO"/>
+        </insert>
+    </changeSet>
+
+    <changeSet id="202407221650" author="jels1991">
+        <insert tableName="rgfactura">
+            <column name="id_rgfactura" value="1"/>
+            <column name="id_empresa" value="1"/>
+            <column name="ruc_receptor" value="321"/>
+            <column name="razon_social_receptor" value="Demo SRL"/>
+            <column name="mes_periodo" value="07"/>
+            <column name="anho_periodo" value="2024"/>
+            <column name="codigo_tipo_registro" value="1"/>
+            <column name="codigo_tipo_comprador" value="11"/>
+            <column name="nro_identificador_comprador" value="3968935"/>
+            <column name="nombre_comprador" value="Jonathan Leonardi"/>
+            <column name="codigo_tipo_comprobante" value="102"/>
+            <column name="fecha_emision" value="16/07/2024"/>
+            <column name="nro_timbrado" value="12558812"/>
+            <column name="nro_comprobante" value="001-001-0000007"/>
+            <column name="monto_iva_10" value="1100000"/>
+            <column name="monto_iva_5" value="0"/>
+            <column name="monto_exenta" value="0"/>
+            <column name="monto_total_comprobante" value="1100000"/>
+            <column name="condicion_venta" value="1"/>
+            <column name="moneda_extranjera" value="N"/>
+            <column name="imputa_iva" value="S"/>
+            <column name="imputa_ire" value="N"/>
+            <column name="imputa_irp_rsp" value="N"/>
+            <column name="comprobante_asociado" value="NULL"/>
+            <column name="timbrado_comprobante_asociado" value="NULL"/>
+            <column name="created_by" value="1"/>
+            <column name="created_at" value="2024-07-16 04:00:00"/>
+            <column name="updated_by" value="1"/>
+            <column name="updated_at" value="2024-07-16 04:00:00"/>
+        </insert>
+
+        <insert tableName="rgfactura">
+            <column name="id_rgfactura" value="2"/>
+            <column name="id_empresa" value="1"/>
+            <column name="ruc_receptor" value="754"/>
+            <column name="razon_social_receptor" value="ARCO"/>
+            <column name="mes_periodo" value="07"/>
+            <column name="anho_periodo" value="2024"/>
+            <column name="codigo_tipo_registro" value="1"/>
+            <column name="codigo_tipo_comprador" value="11"/>
+            <column name="nro_identificador_comprador" value="3968935"/>
+            <column name="nombre_comprador" value="Jonathan Leonardi"/>
+            <column name="codigo_tipo_comprobante" value="102"/>
+            <column name="fecha_emision" value="17/07/2024"/>
+            <column name="nro_timbrado" value="12558812"/>
+            <column name="nro_comprobante" value="001-001-0000008"/>
+            <column name="monto_iva_10" value="2500000"/>
+            <column name="monto_iva_5" value="0"/>
+            <column name="monto_exenta" value="0"/>
+            <column name="monto_total_comprobante" value="2500000"/>
+            <column name="condicion_venta" value="1"/>
+            <column name="moneda_extranjera" value="N"/>
+            <column name="imputa_iva" value="S"/>
+            <column name="imputa_ire" value="N"/>
+            <column name="imputa_irp_rsp" value="N"/>
+            <column name="comprobante_asociado" value="NULL"/>
+            <column name="timbrado_comprobante_asociado" value="NULL"/>
+            <column name="created_by" value="1"/>
+            <column name="created_at" value="2024-07-16 04:00:00"/>
+            <column name="updated_by" value="1"/>
+            <column name="updated_at" value="2024-07-16 04:00:00"/>
+        </insert>
+
+        <insert tableName="rgfactura">
+            <column name="id_rgfactura" value="3"/>
+            <column name="id_empresa" value="1"/>
+            <column name="ruc_receptor" value="754"/>
+            <column name="razon_social_receptor" value="ARCO"/>
+            <column name="mes_periodo" value="06"/>
+            <column name="anho_periodo" value="2024"/>
+            <column name="codigo_tipo_registro" value="1"/>
+            <column name="codigo_tipo_comprador" value="11"/>
+            <column name="nro_identificador_comprador" value="3968935"/>
+            <column name="nombre_comprador" value="Jonathan Leonardi"/>
+            <column name="codigo_tipo_comprobante" value="102"/>
+            <column name="fecha_emision" value="16/07/2024"/>
+            <column name="nro_timbrado" value="12558812"/>
+            <column name="nro_comprobante" value="001-001-0000009"/>
+            <column name="monto_iva_10" value="5500000"/>
+            <column name="monto_iva_5" value="0"/>
+            <column name="monto_exenta" value="0"/>
+            <column name="monto_total_comprobante" value="5500000"/>
+            <column name="condicion_venta" value="1"/>
+            <column name="moneda_extranjera" value="N"/>
+            <column name="imputa_iva" value="S"/>
+            <column name="imputa_ire" value="N"/>
+            <column name="imputa_irp_rsp" value="N"/>
+            <column name="comprobante_asociado" value="NULL"/>
+            <column name="timbrado_comprobante_asociado" value="NULL"/>
+            <column name="created_by" value="1"/>
+            <column name="created_at" value="2024-07-16 04:00:00"/>
+            <column name="updated_by" value="1"/>
+            <column name="updated_at" value="2024-07-16 04:00:00"/>
+        </insert>
+
+        <insert tableName="rgfactura">
+            <column name="id_rgfactura" value="4"/>
+            <column name="id_empresa" value="1"/>
+            <column name="ruc_receptor" value="10"/>
+            <column name="razon_social_receptor" value="Centro educativo nacional Paraguayo Japones"/>
+            <column name="mes_periodo" value="07"/>
+            <column name="anho_periodo" value="2024"/>
+            <column name="codigo_tipo_registro" value="1"/>
+            <column name="codigo_tipo_comprador" value="11"/>
+            <column name="nro_identificador_comprador" value="3968935"/>
+            <column name="nombre_comprador" value="Jonathan Leonardi"/>
+            <column name="codigo_tipo_comprobante" value="102"/>
+            <column name="fecha_emision" value="16/07/2024"/>
+            <column name="nro_timbrado" value="12558812"/>
+            <column name="nro_comprobante" value="001-001-0000010"/>
+            <column name="monto_iva_10" value="2200000"/>
+            <column name="monto_iva_5" value="0"/>
+            <column name="monto_exenta" value="0"/>
+            <column name="monto_total_comprobante" value="2200000"/>
+            <column name="condicion_venta" value="1"/>
+            <column name="moneda_extranjera" value="N"/>
+            <column name="imputa_iva" value="S"/>
+            <column name="imputa_ire" value="N"/>
+            <column name="imputa_irp_rsp" value="N"/>
+            <column name="comprobante_asociado" value="NULL"/>
+            <column name="timbrado_comprobante_asociado" value="NULL"/>
+            <column name="created_by" value="1"/>
+            <column name="created_at" value="2024-07-16 19:37:58"/>
+            <column name="updated_by" value="1"/>
+            <column name="updated_at" value="2024-07-16 19:38:02"/>
+        </insert>
+
+        <insert tableName="rgfactura">
+            <column name="id_rgfactura" value="5"/>
+            <column name="id_empresa" value="1"/>
+            <column name="ruc_receptor" value="12345678"/>
+            <column name="razon_social_receptor" value="Morado"/>
+            <column name="mes_periodo" value="07"/>
+            <column name="anho_periodo" value="2024"/>
+            <column name="codigo_tipo_registro" value="1"/>
+            <column name="codigo_tipo_comprador" value="11"/>
+            <column name="nro_identificador_comprador" value="3968935"/>
+            <column name="nombre_comprador" value="Jonathan Leonardi"/>
+            <column name="codigo_tipo_comprobante" value="102"/>
+            <column name="fecha_emision" value="16/07/2024"/>
+            <column name="nro_timbrado" value="12558812"/>
+            <column name="nro_comprobante" value="001-001-0000011"/>
+            <column name="monto_iva_10" value="2200000"/>
+            <column name="monto_iva_5" value="0"/>
+            <column name="monto_exenta" value="0"/>
+            <column name="monto_total_comprobante" value="2200000"/>
+            <column name="condicion_venta" value="1"/>
+            <column name="moneda_extranjera" value="N"/>
+            <column name="imputa_iva" value="S"/>
+            <column name="imputa_ire" value="N"/>
+            <column name="imputa_irp_rsp" value="N"/>
+            <column name="comprobante_asociado" value="NULL"/>
+            <column name="timbrado_comprobante_asociado" value="NULL"/>
+            <column name="created_by" value="1"/>
+            <column name="created_at" value="2024-07-16 19:37:43"/>
+            <column name="updated_by" value="1"/>
+            <column name="updated_at" value="2024-07-16 19:37:43"/>
+        </insert>
+
+        <insert tableName="rgfactura">
+            <column name="id_rgfactura" value="6"/>
+            <column name="id_empresa" value="1"/>
+            <column name="ruc_receptor" value="12345678"/>
+            <column name="razon_social_receptor" value="Morado"/>
+            <column name="mes_periodo" value="06"/>
+            <column name="anho_periodo" value="2024"/>
+            <column name="codigo_tipo_registro" value="1"/>
+            <column name="codigo_tipo_comprador" value="11"/>
+            <column name="nro_identificador_comprador" value="3968935"/>
+            <column name="nombre_comprador" value="Jonathan Leonardi"/>
+            <column name="codigo_tipo_comprobante" value="102"/>
+            <column name="fecha_emision" value="05/06/2024"/>
+            <column name="nro_timbrado" value="12345679"/>
+            <column name="nro_comprobante" value="001-001-0000001"/>
+            <column name="monto_iva_10" value="550000"/>
+            <column name="monto_iva_5" value="0"/>
+            <column name="monto_exenta" value="0"/>
+            <column name="monto_total_comprobante" value="550000"/>
+            <column name="condicion_venta" value="1"/>
+            <column name="moneda_extranjera" value="N"/>
+            <column name="imputa_iva" value="S"/>
+            <column name="imputa_ire" value="N"/>
+            <column name="imputa_irp_rsp" value="N"/>
+            <column name="comprobante_asociado" value="NULL"/>
+            <column name="timbrado_comprobante_asociado" value="NULL"/>
+            <column name="created_by" value="1"/>
+            <column name="created_at" value="2024-07-16 20:55:43"/>
+            <column name="updated_by" value="1"/>
+            <column name="updated_at" value="2024-07-16 20:55:43"/>
+        </insert>
+
+        <insert tableName="rgfactura">
+            <column name="id_rgfactura" value="7"/>
+            <column name="id_empresa" value="1"/>
+            <column name="ruc_receptor" value="754"/>
+            <column name="razon_social_receptor" value="ARCO"/>
+            <column name="mes_periodo" value="07"/>
+            <column name="anho_periodo" value="2024"/>
+            <column name="codigo_tipo_registro" value="1"/>
+            <column name="codigo_tipo_comprador" value="11"/>
+            <column name="nro_identificador_comprador" value="3968935"/>
+            <column name="nombre_comprador" value="Jonathan Leonardi"/>
+            <column name="codigo_tipo_comprobante" value="102"/>
+            <column name="fecha_emision" value="17/07/2023"/>
+            <column name="nro_timbrado" value="12558812"/>
+            <column name="nro_comprobante" value="001-001-0000008"/>
+            <column name="monto_iva_10" value="2500000"/>
+            <column name="monto_iva_5" value="0"/>
+            <column name="monto_exenta" value="0"/>
+            <column name="monto_total_comprobante" value="2500000"/>
+            <column name="condicion_venta" value="1"/>
+            <column name="moneda_extranjera" value="N"/>
+            <column name="imputa_iva" value="S"/>
+            <column name="imputa_ire" value="N"/>
+            <column name="imputa_irp_rsp" value="N"/>
+            <column name="comprobante_asociado" value="NULL"/>
+            <column name="timbrado_comprobante_asociado" value="NULL"/>
+            <column name="created_by" value="1"/>
+            <column name="created_at" value="2024-07-16 04:00:00"/>
+            <column name="updated_by" value="1"/>
+            <column name="updated_at" value="2024-07-16 04:00:00"/>
+        </insert>
+    </changeSet>
+
+
+    <changeSet  id="202407231020" author="jels1991">
+        <renameColumn
+            tableName="rgfactura"
+            oldColumnName="monto_iva_10"
+            newColumnName="monto_grabado_diez"
+            columnDataType="VARCHAR(255)"/>
+        <renameColumn
+            tableName="rgfactura"
+            oldColumnName="monto_iva_5"
+            newColumnName="monto_grabado_cinco"
+            columnDataType="VARCHAR(255)"/>
+        <renameColumn
+            tableName="rgfactura"
+            oldColumnName="monto_exenta"
+            newColumnName="monto_grabado_exenta"
+            columnDataType="VARCHAR(255)"/>
+    </changeSet>
+
+    <changeSet  id="202407231200" author="jels1991">
+        <addColumn tableName="factura">
+            <column name="moneda_extranjera" type="VARCHAR(10)"/>
+        </addColumn>
+        <addColumn tableName="factura">
+            <column name="tipo_registro" type="int" />
+        </addColumn>
+        <addColumn tableName="factura">
+            <column name="tipo_documento" type="int" />
+        </addColumn>
+        <addColumn tableName="factura">
+            <column name="tipo_comprobante" type="int" />
+        </addColumn>
+        <addColumn tableName="factura">
+            <column name="imputa_iva" type="VARCHAR(10)" />
+        </addColumn>
+        <addColumn tableName="factura">
+            <column name="imputa_ire" type="VARCHAR(10)" />
+        </addColumn>
+        <addColumn tableName="factura">
+            <column name="imputa_irp_rsp" type="VARCHAR(10)" />
+        </addColumn>
+    </changeSet>
+
+    <changeSet  id="202407232128" author="jels1991">
+        <addColumn tableName="factura">
+            <column name="comprobante_asociado" type="VARCHAR(50)"/>
+        </addColumn>
+        <addColumn tableName="factura">
+            <column name="timbrado_comprobante_asociado" type="VARCHAR(50)" />
+        </addColumn>
+        <addColumn tableName="factura">
+            <column name="estado_rg90_factura" type="VARCHAR(50)" />
+        </addColumn>
+        <addColumn tableName="factura">
+            <column name="id_rg90_generado" type="INT UNSIGNED" />
+        </addColumn>
+        <addColumn tableName="factura">
+            <column name="contador_rg90" type="VARCHAR(10)" />
+        </addColumn>
+        <addForeignKeyConstraint baseTableName="factura"
+                                 baseColumnNames="id_rg90_generado"
+                                 constraintName="fk_factura_historialRg90"
+                                 referencedTableName="historialinformes"
+                                 referencedColumnNames="id_historial"/>
+    </changeSet>
+
+    <changeSet  id="202407232130" author="jels1991">
+        <dropForeignKeyConstraint baseTableName="factura"
+                              constraintName="fk_factura_historialRg90"/>
+    </changeSet>
+
+    <changeSet  id="202407232131" author="jels1991">
+        <dropTable tableName="rgfactura"/>
+    </changeSet>
+
+    
+    <changeSet  id="202407241400" author="jels1991">
+        <dropIndex indexName="fk_factura_historialRg90" tableName="factura"/>
+    </changeSet>
+
+
+</databaseChangeLog>
